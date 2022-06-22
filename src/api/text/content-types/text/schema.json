@@ -4,7 +4,8 @@
   "info": {
     "singularName": "text",
     "pluralName": "texts",
-    "displayName": "text"
+    "displayName": "text",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -17,7 +18,7 @@
       "regex": "^[\\S]+$",
       "required": true
     },
-    "bahasa": {
+    "indonesia": {
       "type": "richtext",
       "required": true
     },
