@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "texts",
+  "info": {
+    "singularName": "text",
+    "pluralName": "texts",
+    "displayName": "text"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "unique": true,
+      "regex": "^[\\S]+$",
+      "required": true
+    },
+    "bahasa": {
+      "type": "richtext",
+      "required": true
+    },
+    "english": {
+      "type": "richtext",
+      "required": true
+    }
+  }
+}
