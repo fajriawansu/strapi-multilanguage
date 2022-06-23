@@ -9,12 +9,21 @@ module.exports = {
       },
     },
     {
-        method: "GET",
-        path: "/all-texts-converted/:language",
-        handler: "text.fetchAllTextConverted",
-        config: {
-          auth: false,
-        },
+      method: "GET",
+      path: "/all-texts-converted/:language",
+      handler: "text.fetchAllTextConverted",
+      config: {
+        auth: false,
       },
+    },
+    ,
+    {
+      method: "GET",
+      path: "/all-texts-converted",
+      handler: "text.fetchAllTextConverted",
+      config: {
+        auth: false,
+      },
+    },
   ],
 };

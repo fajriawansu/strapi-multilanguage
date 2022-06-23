@@ -1,5 +1,5 @@
 {
-  "name": "multi-language",
+  "name": "strapi-translation",
   "private": true,
   "version": "0.1.0",
   "description": "A Strapi application",
@@ -14,13 +14,13 @@
     "@strapi/strapi": "4.2.0",
     "@strapi/plugin-users-permissions": "4.2.0",
     "@strapi/plugin-i18n": "4.2.0",
-    "better-sqlite3": "7.4.6"
+    "mysql": "2.18.1"
   },
   "author": {
     "name": "A Strapi developer"
   },
   "strapi": {
-    "uuid": "6cd66195-72c5-4458-98ab-0f7e995fc93b"
+    "uuid": "5af0651a-ade2-41c9-9a1e-5886ee09d85a"
   },
   "engines": {
     "node": ">=12.x.x <=16.x.x",

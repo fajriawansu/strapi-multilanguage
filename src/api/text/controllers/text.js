@@ -15,16 +15,16 @@ module.exports = createCoreController("api::text.text", ({ strapi }) => ({
     return result;
   },
 
-  async fetchAllTextConverted(ctx){
+  async fetchAllTextConverted(ctx) {
     const { language } = ctx.params;
-    const theData = await this.fetchAllText()
+    const theData = await this.fetchAllText();
     const result = theData.reduce((_obj, _item) => {
-        return {
-          ..._obj,
-          [_item['title']]: _item[language === 'indonesia' ? 'indonesia' : 'english']
-        };
-      }, {});
-    return result
-  }
-
+      return {
+        ..._obj,
+        [_item["title"]]:
+          _item[language === "indonesia" ? "indonesia" : "english"],
+      };
+    }, {});
+    return result;
+  },
 }));
