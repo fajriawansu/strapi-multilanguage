@@ -8,10 +8,14 @@ const { createCoreController } = require("@strapi/strapi").factories;
 
 module.exports = createCoreController("api::text.text", ({ strapi }) => ({
   async fetchAllText(ctx) {
-    const result = await strapi.entityService.findMany("api::text.text", {
-      fields: ["id", "title", "english", "indonesia"],
-    });
+    const result = await strapi.service("api::text.text").findMany()
+    return result;
+  },
 
+  async findOneTitle(ctx){
+
+    const { title } = ctx.request.body
+    const result = await strapi.service("api::text.text").findByTitleAndUpdate(title)
     return result;
   },
 
@@ -27,4 +31,11 @@ module.exports = createCoreController("api::text.text", ({ strapi }) => ({
     }, {});
     return result;
   },
+
+  async updateDataText(ctx){
+    const { data_text } = ctx.request.body
+    const result = await strapi.service("api::text.text").updateLanguageByArray(data_text)
+    return result
+  }
+
 }));

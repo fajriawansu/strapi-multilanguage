@@ -1,0 +1,30 @@
+{
+  "name": "language-document",
+  "version": "0.0.0",
+  "description": "This is the description of the plugin.",
+  "strapi": {
+    "name": "language-document",
+    "description": "Description of Language Document plugin",
+    "kind": "plugin",
+    "displayName": "Language Document"
+  },
+  "dependencies": {
+    "react-data-table-component": "^7.5.2",
+    "rsuite": "^5.15.1",
+    "xlsx": "^0.18.5"
+  },
+  "author": {
+    "name": "A Strapi developer",
+    "email": "fajriawan@mmi-pt.com"
+  },
+  "maintainers": [
+    {
+      "name": "A Strapi developer"
+    }
+  ],
+  "engines": {
+    "node": ">=14.19.1 <=16.x.x",
+    "npm": ">=6.0.0"
+  },
+  "license": "MIT"
+}

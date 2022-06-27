@@ -5,16 +5,18 @@
   "description": "A Strapi application",
   "scripts": {
     "develop": "strapi develop",
+    "dev-admin": "strapi develop --watch-admin",
     "start": "strapi start",
     "build": "strapi build",
     "strapi": "strapi"
   },
-  "devDependencies": {},
   "dependencies": {
-    "@strapi/strapi": "4.2.0",
-    "@strapi/plugin-users-permissions": "4.2.0",
     "@strapi/plugin-i18n": "4.2.0",
-    "mysql": "2.18.1"
+    "@strapi/plugin-users-permissions": "4.2.0",
+    "@strapi/strapi": "4.2.0",
+    "mysql": "2.18.1",
+    "rsuite": "^5.15.1",
+    "strapi-plugin-import-export-entries": "^1.5.0"
   },
   "author": {
     "name": "A Strapi developer"

@@ -25,5 +25,21 @@ module.exports = {
         auth: false,
       },
     },
+    {
+      method: "POST",
+      path: "/find-title",
+      handler: "text.findOneTitle",
+      config: {
+        auth: false,
+      },
+    },
+    {
+      method: "POST",
+      path: "/updata-all-text",
+      handler: "text.updateDataText",
+      config: {
+        auth: false,
+      },
+    },
   ],
 };
