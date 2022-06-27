@@ -71,7 +71,7 @@ const HomePage = () => {
             type="button"
             className="btn btn-success btn-sm"
             onClick={handleGenerate}
-            style={{ marginLeft: 8 }}
+            style={{ margin: 8 }}
           >
             Generate File
           </button>
@@ -93,8 +93,8 @@ const HomePage = () => {
                 <tr key={k}>
                   <th scope="row">{k + 1}</th>
                   <td>{v.title}</td>
-                  <td>{v.english}</td>
-                  <td>{v.indonesia}</td>
+                  <td>{v.english?.length < 16 ? v.english : v.english.substr(0, 16) + '...'}</td>
+                  <td>{v.indonesia?.length < 16 ? v.indonesia : v.indonesia.substr(0, 16) + '...'}</td>
                 </tr>
               );
             })}
@@ -103,9 +103,9 @@ const HomePage = () => {
       )}
       {excelData?.length > 0 && <button
         type="button"
-        className="btn btn-success btn-lg"
+        className="btn btn-success"
         onClick={handleApply}
-        style={{ marginLeft: 8 }}
+        style={{ marginTop: 8 }}
       >
         Apply
       </button>}
