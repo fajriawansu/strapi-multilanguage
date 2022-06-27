@@ -7,14 +7,13 @@
 import React, { memo, useState } from "react";
 import { Uploader } from "rsuite";
 import * as XLSX from "xlsx";
-
-import pluginId from "../../pluginId";
 import { fetchAllText, postNewData, updateAllText } from "./action";
 
 const HomePage = () => {
   const [excelFile, setExcelFile] = useState(null);
   const [excelData, setExcelData] = useState([]);
   const [fileName, setFileName] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleUpload = async (data) => {
     let reader = new FileReader();
@@ -44,8 +43,12 @@ const HomePage = () => {
 
   const handleApply = async () => {
     let payload = { data_text: [...excelData] };
-    const resp = await updateAllText(payload);
-    console.log(resp);
+    if(confirm("Are you sure you want to update the 'text' data with this data?")){
+      const resp = await updateAllText(payload);
+      if(resp.status == 200 || resp.status == 201){
+        setIsSuccess(true)
+      }
+    }
   };
 
   return (
@@ -89,18 +92,21 @@ const HomePage = () => {
           </thead>
           <tbody>
             {excelData.map((v, k) => {
-              return (
-                <tr key={k}>
-                  <th scope="row">{k + 1}</th>
-                  <td>{v.title}</td>
-                  <td>{v.english?.length < 16 ? v.english : v.english.substr(0, 16) + '...'}</td>
-                  <td>{v.indonesia?.length < 16 ? v.indonesia : v.indonesia.substr(0, 16) + '...'}</td>
-                </tr>
-              );
+              if(k < 20){
+                return (
+                  <tr key={k}>
+                    <th scope="row">{k + 1}</th>
+                    <td>{v.title}</td>
+                    <td>{v.english?.length < 16 ? v.english : v.english.substr(0, 16) + '...'}</td>
+                    <td>{v.indonesia?.length < 16 ? v.indonesia : v.indonesia.substr(0, 16) + '...'}</td>
+                  </tr>
+                );
+              }
             })}
           </tbody>
         </table>
       )}
+      {excelData?.length > 20 && <div>showing only 20 of {excelData.length} data</div>}
       {excelData?.length > 0 && <button
         type="button"
         className="btn btn-success"
