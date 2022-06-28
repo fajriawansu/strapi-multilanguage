@@ -9,7 +9,6 @@
     "displayName": "Language Document"
   },
   "dependencies": {
-    "react-data-table-component": "^7.5.2",
     "rsuite": "^5.15.1",
     "xlsx": "^0.18.5"
   },

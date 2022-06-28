@@ -5,7 +5,7 @@
  */
 
 import React, { memo, useState } from "react";
-import { Uploader } from "rsuite";
+import { Message, Uploader, useToaster } from "rsuite";
 import * as XLSX from "xlsx";
 import { fetchAllText, postNewData, updateAllText } from "./action";
 
@@ -13,15 +13,26 @@ const HomePage = () => {
   const [excelFile, setExcelFile] = useState(null);
   const [excelData, setExcelData] = useState([]);
   const [fileName, setFileName] = useState("");
-  const [isSuccess, setIsSuccess] = useState(false);
+
+  const toaster = useToaster();
+
+  const message = (label, type) => (
+    <Message showIcon type={type}>{label}</Message>
+  );
 
   const handleUpload = async (data) => {
     let reader = new FileReader();
     reader.readAsArrayBuffer(data.blobFile);
-    setFileName(data.name);
-    reader.onload = (e) => {
-      setExcelFile(e.target.result);
-    };
+    if(String(data.name).includes(".xls")){
+      reader.onload = (e) => {
+        setFileName(data.name);
+        setExcelFile(e.target.result);
+        toaster.push(message("Uploaded", "success"))
+      };
+    } else {
+      toaster.push(message("It is not excel file", "error"))
+      setFileName("");
+    }
   };
 
   const handleGenerate = () => {
@@ -33,7 +44,7 @@ const HomePage = () => {
     if(data?.length > 0 && Array.isArray(data)){
       const tempData = [];
       data.forEach((v) => {
-        if(v.title && v.english && v.indonesia){
+        if(v.title && v.english && v.indonesia && (/^[a-z0-9_]+$/).test(String(v.title))){
           tempData.push({title: v.title, english: v.english, indonesia: v.indonesia})
         }
       }) 
@@ -46,7 +57,9 @@ const HomePage = () => {
     if(confirm("Are you sure you want to update the 'text' data with this data?")){
       const resp = await updateAllText(payload);
       if(resp.status == 200 || resp.status == 201){
-        setIsSuccess(true)
+        toaster.push(message("Applied", "success"))
+      } else {
+        toaster.push(message("Failed", "error"))
       }
     }
   };
@@ -59,8 +72,9 @@ const HomePage = () => {
         fileListVisible={false}
         onUpload={handleUpload}
       >
-        <div style={{ lineHeight: "200px" }}>
-          Click or Drag files to this area to upload
+        <div style={{padding: 75}}>
+          Click or Drag files to this area to upload<br />
+          (your table header must only have columns named "title", "english", and "indonesia")
         </div>
       </Uploader>
       {fileName && (
